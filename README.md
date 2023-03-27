@@ -1,8 +1,11 @@
 # Update-Checker
-An update checker for websites
+A python based update checker for websites.
 
-A python based website update checker for MAC.
+A python based website update checker for MAC OS. 
 Enter the webiste you want to supervise, when a new version is released you will receive a sound ping and a notification and/or a message notification on telegram.
+
+# How it works
+The html code for the website is fetched every 5 seconds, the hash of the content is generated and stored, the new version of the website is compared to the stored hashvalue, and if different the website content has changed.
 
  
 # Usage for updateChecker.py:
