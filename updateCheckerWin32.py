@@ -28,10 +28,16 @@ def notify(title, text):
 if __name__ == "__main__":
     import_or_install('ctypes')
     url = input("Enter the URL you want to check: ")
-    r = requests.get(url, allow_redirects=True)
+    try:
+        r = requests.get(url, allow_redirects=True)
+    except:
+        r = requests.get("https://" + url, allow_redirects=True)
     previousHash = hash(r.text)
     while (1==1):
-        r = requests.get(url, allow_redirects=True)
+        try:
+            r = requests.get(url, allow_redirects=True)
+        except:
+            r = requests.get("https://" + url, allow_redirects=True)
         if (previousHash == hash(r.text)):
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
