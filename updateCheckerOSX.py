@@ -16,18 +16,6 @@ def notify(title, text):
             """.format(text, title))
 
 if __name__ == "__main__":
-
-def import_or_install(package):
-    try:
-        __import__(package)
-    except ImportError:
-        pip.main(['install', package])     
-    if platform == "linux" or platform == "linux2":
-        system = "linux"
-    elif platform == "darwin":
-        system = "osx"
-    elif platform == "win32":
-        system = "windows"
     url = input("Enter the URL you want to check: ")
     r = requests.get(url, allow_redirects=True)
     previousHash = hash(r.text)

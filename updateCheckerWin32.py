@@ -12,22 +12,11 @@ system = ""
 title = "New version for " + url
 message = "A new version for " + url + " has been detected"
 
-
-
-def import_or_install(package):
-    print('installing')
-    try:
-        __import__(package)
-    except ImportError:
-        pip.main(['install', package])     
-
 def notify(title, text):
     ctypes.windll.user32.MessageBoxW(0, message, title, 0x40)
    
 
 if __name__ == "__main__":
-    import_or_install('ctypes')
-    import_or_install('requests')
     url = input("Enter the URL you want to check: ")
     try:
         r = requests.get(url, allow_redirects=True)
