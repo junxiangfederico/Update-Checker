@@ -27,6 +27,7 @@ def notify(title, text):
 
 if __name__ == "__main__":
     import_or_install('ctypes')
+    import_or_install('requests')
     url = input("Enter the URL you want to check: ")
     try:
         r = requests.get(url, allow_redirects=True)
