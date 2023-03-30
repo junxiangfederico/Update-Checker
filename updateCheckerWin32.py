@@ -2,8 +2,8 @@ import requests
 import time
 import os
 import sys
+import pip
 import ctypes
-import notify2
 from datetime import datetime
 from sys import platform
 
@@ -12,26 +12,21 @@ system = ""
 title = "New version for " + url
 message = "A new version for " + url + " has been detected"
 
+
+
+def import_or_install(package):
+    print('installing')
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package])     
+
 def notify(title, text):
-    if system == "win32":
-        ctypes.windll.user32.MessageBoxW(0, message, title, 0x40)
-    elif system == "osx":
-        os.system("""
-        osascript -e 'display notification "{}" with title "{}"'
-        """.format(text, title))
-    elif system =="linux" or system == "linux2":
-        notify2.init('Notification App')
-        n = notify2.Notification(title, message)
-        n.set_urgency(notify2.URGENCY_NORMAL)
-        n.show()
+    ctypes.windll.user32.MessageBoxW(0, message, title, 0x40)
+   
 
 if __name__ == "__main__":
-    if platform == "linux" or platform == "linux2":
-        system = "linux"
-    elif platform == "darwin":
-        system = "osx"
-    elif platform == "win32":
-        system = "windows"
+    import_or_install('ctypes')
     url = input("Enter the URL you want to check: ")
     r = requests.get(url, allow_redirects=True)
     previousHash = hash(r.text)
